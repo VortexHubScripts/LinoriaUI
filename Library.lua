@@ -30,11 +30,18 @@ local Library = {
     HudRegistry = {};
 
     FontColor = Color3.fromRGB(255, 255, 255);
+    MainColor = Color3.fromRGB(30, 30, 37);
+    BackgroundColor = Color3.fromRGB(20, 20, 20);
+    AccentColor = Color3.fromRGB(255,255, 255);
+    OutlineColor = Color3.fromRGB(54, 54, 60);
+    RiskColor = Color3.fromRGB(255, 50, 50),
+    --[[ Original colors
+    FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
     AccentColor = Color3.fromRGB(0, 85, 255);
     OutlineColor = Color3.fromRGB(50, 50, 50);
-    RiskColor = Color3.fromRGB(255, 50, 50),
+    RiskColor = Color3.fromRGB(255, 50, 50),]]
 
     Black = Color3.new(0, 0, 0);
     Font = Enum.Font.Code,
@@ -2986,6 +2993,20 @@ function Library:CreateWindow(...)
         BackgroundColor3 = 'MainColor';
         BorderColor3 = 'AccentColor';
     });
+
+    -- Add background image
+    if Config.BackgroundImage then
+        local bgImage = Instance.new("ImageLabel")
+        bgImage.Name = "BackgroundImage"
+        bgImage.BackgroundTransparency = 1
+        bgImage.Size = UDim2.new(1, 0, 1, 0)
+        bgImage.Position = UDim2.new(0, 0, 0, 0)
+        bgImage.Image = Config.BackgroundImage
+        bgImage.ImageTransparency = Config.BackgroundTransparency or 0.3
+        bgImage.ScaleType = Config.BackgroundScaleType or Enum.ScaleType.Crop
+        bgImage.ZIndex = 0
+        bgImage.Parent = Inner
+    end
 
     local WindowLabel = Library:CreateLabel({
         Position = UDim2.new(0, 7, 0, 0);
